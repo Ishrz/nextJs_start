@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getProduct } from "../../../lib/api";
+import AddToCartButton from "@/src/components/AddToCartButton";
 
 export default async function ProductPage({ params }) {
   const { id } = await params;
@@ -54,9 +55,10 @@ export default async function ProductPage({ params }) {
               {product.description}
             </p>
 
-            <button className="mt-8 rounded-full bg-gray-900 px-8 py-4 font-medium text-white transition hover:bg-blue-600">
+            {/* <button className="mt-8 rounded-full bg-gray-900 px-8 py-4 font-medium text-white transition hover:bg-blue-600">
               Add to Cart
-            </button>
+            </button> */}
+            <AddToCartButton product={product} />
 
           </div>
 

@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useCart } from "../context/CartContext";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const {cartCount}= useCart()
 
   return (
     <nav className="border-b bg-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-
         {/* Logo */}
         <h1 className="text-2xl font-bold">
           Shop<span className="text-blue-600">Ease</span>
@@ -36,7 +37,18 @@ export default function Navbar() {
         {/* Desktop Actions */}
         <div className="hidden items-center gap-4 md:flex">
           <button className="text-xl">🔍</button>
-          <button className="text-xl">🛒</button>
+          {/* <button className="text-xl">🛒</button> */}
+          <div className="relative">
+            <Link href="/cart" className="text-xl">
+              🛒
+            </Link>
+
+            {cartCount > 0 && (
+              <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-xs text-white">
+                {cartCount}
+              </span>
+            )}
+          </div>
 
           <button className="rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white hover:bg-blue-600">
             Login
@@ -55,7 +67,6 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="border-t px-6 py-5 md:hidden">
-
           <div className="flex flex-col gap-5">
             <Link href="/" className="font-medium">
               Home
@@ -77,7 +88,6 @@ export default function Navbar() {
               Login
             </button>
           </div>
-
         </div>
       )}
     </nav>
