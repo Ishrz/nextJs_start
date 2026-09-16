@@ -1,11 +1,17 @@
 import Link from "next/link";
 import { getProduct } from "../../../lib/api";
 import AddToCartButton from "@/src/components/AddToCartButton";
+import { notFound } from "next/navigation";
 
 export default async function ProductPage({ params }) {
   const { id } = await params;
 
-  const product = await getProduct(id);
+  let product;
+ try{
+      product = await getProduct(id);
+ }catch{
+    notFound()
+ }
 
   return (
     <main className="min-h-screen bg-white px-6 py-16">
